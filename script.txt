@@ -1,0 +1,30 @@
+<script>
+    	Enemy = function() {
+        	this.hp = 0;
+            this.dmg = 0;
+            this.atkspeed = 0;
+            this.uniq = 1;
+            this.pos_x = 0;
+            this.pos_y = 0;
+        }
+        Creature = {
+        	bat : {
+            	create : function(obj, type) {
+                	obj.hp = 4;
+                    obj.dmg = 1;
+                    obj.atkspeed = 30;
+                    obj.type = type;
+                    console.log(this)
+                },
+                step : function(obj) {
+                	obj.pos_x = obj.pos_x+10;
+                    obj.pos_y = obj.pos_y-10;
+                }
+            }
+        };
+        var type = "bat";
+        var enemy = new Enemy();
+        Creature[type].create(enemy, type);
+    	console.log(enemy);
+        Creature[enemy.type].step(enemy);
+    </script>
