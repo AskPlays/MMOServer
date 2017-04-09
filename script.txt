@@ -14,7 +14,7 @@
                     obj.dmg = 1;
                     obj.atkspeed = 30;
                     obj.type = type;
-                    console.log(this)
+                    console.log(this);
                 },
                 step : function(obj) {
                 	obj.pos_x = obj.pos_x+10;

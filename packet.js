@@ -100,6 +100,7 @@ module.exports = packet = {
                 c.user.save();
                 c.broadcastroom(packet.build(["POS", c.user.username, data.target_x, data.target_y]));
                 break;
+                
             case "ENTER":
                 var data = PacketModels.enter.parse(datapacket);
                 c.user.pos_x = data.start_x;
@@ -109,6 +110,7 @@ module.exports = packet = {
                 c.user.save();
                 if(config.environment === 'test') console.log(data);
                 break;
+                
             case "ABILITY_CREATE":
                 var data = PacketModels.ability_create.parse(datapacket);
                 var entity = {};
@@ -122,12 +124,16 @@ module.exports = packet = {
                 if(config.environment === 'test') console.log(data);
                 if(config.environment === 'test') console.log(maps[c.user.current_room].ability);
                 break;
+                
             case "HP_CHANGE":
                 var data = PacketModels.hp_change.parse(datapacket);
                 if(data.type == "enemy") {
                     maps[c.user.current_room].enemy.forEach( function (oEnemy) {
                          if(oEnemy.name == data.name) {
                              oEnemy.hp = data.hp;
+                             if(oEnemy.hp == 0) {
+                                 c.user.exp += oEnemy.value;
+                             }
                          }
                     });
                 }
