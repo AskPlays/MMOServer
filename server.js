@@ -27,7 +27,7 @@ var map_files = fs.readdirSync(config.data_paths.maps);
 map_files.forEach(function(mapFile){
     console.log('Loading Map: ' + mapFile);
     var map = require(config.data_paths.maps + mapFile);
-    maps[map.room] = map
+    maps[map.room] = map;
 });
 
 net.createServer(function(socket){
@@ -83,7 +83,7 @@ spawners = [];
 init_spawners();
 if(config.environment === 'test') console.log("Spawners iniated");
 
-mps = ["rm_map_home", "rm_map_home_town", "rm_map_norway"];
+mps = Object.keys(maps);
 
 //game updates
 function update() {
@@ -102,7 +102,6 @@ function update() {
 
 
     //Spawners
-
     for(var i = 0; i < spawners.length; i++) {
         if(spawners[i].counter === spawners[i].cool) {
             spawners[i].counter = 0;
